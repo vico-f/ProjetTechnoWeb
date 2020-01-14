@@ -7,5 +7,6 @@ import com.dto.Mission;
 public interface MissionBLO {
 
 	public ArrayList<Mission> getInfoMission(String numTrain) throws MissionException;
+	
 
 }
