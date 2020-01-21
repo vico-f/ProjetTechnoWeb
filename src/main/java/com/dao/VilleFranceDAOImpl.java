@@ -6,11 +6,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import com.config.JDBCConfigurationSol1;
 import com.dto.LieuMission;
 import com.dto.Mission;
 import com.dto.VilleFrance;
 
+@Repository
 public class VilleFranceDAOImpl implements VilleFranceDAO{
 	 private static final String SQL_INSERT = "INSERT INTO ville_france (Code_commune_INSEE, Nom_commune, "
 	            + "Code_postal, Libelle_acheminement, Ligne_5, Latitude, Longitude) " + "VALUES (";
@@ -19,7 +22,6 @@ public class VilleFranceDAOImpl implements VilleFranceDAO{
 	 
 	 @Override
 	public ArrayList<VilleFrance> getVille() {
-		ArrayList<Mission> listMission = new ArrayList<Mission>();
 		ArrayList<VilleFrance> listVille = new ArrayList<VilleFrance>();
 
 		try {
@@ -36,15 +38,14 @@ public class VilleFranceDAOImpl implements VilleFranceDAO{
 			while (resultSet.next()) {
 				VilleFrance ville = new VilleFrance();
 				
-				ville.setCodeCommuneInsee(resultSet.getString("codeCommuneInsee"));
-				ville.setCodePostal(resultSet.getString("codePostal"));
-				ville.setLattitude(resultSet.getString("lattitude"));
-				ville.setLibelleAcheminement(resultSet.getString("libelleAcheminement"));
-				ville.setLigne5(resultSet.getString("ligne5"));
-				ville.setLongitude(resultSet.getString("longitude"));
-				ville.setNomCommune(resultSet.getString("nomCommune"));
-
-
+				ville.setCodeCommuneInsee(resultSet.getString("Code_commune_INSEE"));
+				ville.setNomCommune(resultSet.getString("Nom_commune"));
+				ville.setCodePostal(resultSet.getString("Code_postal"));
+				ville.setLibelleAcheminement(resultSet.getString("Libelle_acheminement"));
+				ville.setLigne5(resultSet.getString("Ligne_5"));
+				ville.setLattitude(resultSet.getString("Latitude"));
+				ville.setLongitude(resultSet.getString("Longitude"));
+				
 				listVille.add(ville);
 			}
 
@@ -99,44 +100,56 @@ public class VilleFranceDAOImpl implements VilleFranceDAO{
 	}
 
 	@Override
-	public ArrayList<VilleFrance> findVille(VilleFrance ville) throws SQLException {
-		ArrayList<VilleFrance> villeFranceListe = new ArrayList<VilleFrance>();
-		Connection con = JDBCConfigurationSol1.getConnection();
-		// solution 2
-		// Connection con = JDBCConfigurationSol2.getConnection();
-		Statement statement = con.createStatement();
-		ResultSet resultSet = statement.executeQuery(SQL_SELECT_WHERE + " WHERE Code_Postal LIKE '%" + ville.getCodePostal() + "%'");
-		while (resultSet.next()) {
-			VilleFrance villeCherche = new VilleFrance();
-			
-			ville.setCodeCommuneInsee(resultSet.getString("codeCommuneInsee"));
-			ville.setCodePostal(resultSet.getString("codePostal"));
-			ville.setLattitude(resultSet.getString("lattitude"));
-			ville.setLibelleAcheminement(resultSet.getString("libelleAcheminement"));
-			ville.setLigne5(resultSet.getString("ligne5"));
-			ville.setLongitude(resultSet.getString("longitude"));
-			ville.setNomCommune(resultSet.getString("nomCommune"));
+	public ArrayList<VilleFrance> findVille(VilleFrance villeParam) {
+		ArrayList<VilleFrance> listVille = new ArrayList<VilleFrance>();
 
+		try {
+			// solution 1
+			Connection con = JDBCConfigurationSol1.getConnection();
+			// solution 2
+			// Connection con = JDBCConfigurationSol2.getConnection();
+			Statement statement = con.createStatement();
 
-			villeFranceListe.add(villeCherche);
-        }
-		resultSet.close();
-		statement.close();
-		return villeFranceListe;
+			// execute la requete
+			ResultSet resultSet = statement.executeQuery(SQL_SELECT_WHERE + " WHERE Code_Postal LIKE '%" + villeParam.getCodePostal() + "%'");
+
+			// parcourt des éléments de réponse
+			while (resultSet.next()) {
+				VilleFrance ville = new VilleFrance();
+				
+				ville.setCodeCommuneInsee(resultSet.getString("Code_commune_INSEE"));
+				ville.setNomCommune(resultSet.getString("Nom_commune"));
+				ville.setCodePostal(resultSet.getString("Code_postal"));
+				ville.setLibelleAcheminement(resultSet.getString("Libelle_acheminement"));
+				ville.setLigne5(resultSet.getString("Ligne_5"));
+				ville.setLattitude(resultSet.getString("Latitude"));
+				ville.setLongitude(resultSet.getString("Longitude"));
+				
+				listVille.add(ville);
+			}
+
+			// close de la connexion
+			resultSet.close();
+			statement.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listVille;
 	}
+	
 	@Override
-	public void modifyVille(VilleFrance ville) throws SQLException {
-		ArrayList<VilleFrance> villeFranceListe = new ArrayList<VilleFrance>();
+	public void modifyVille(VilleFrance villeP) throws SQLException {
 		Connection con = JDBCConfigurationSol1.getConnection();
 		// solution 2
 		// Connection con = JDBCConfigurationSol2.getConnection();
 		Statement statement = con.createStatement();
-		ResultSet resultSet = statement.executeQuery("UPDATE ville_france SET Nom_Commune = '" + ville.getNomCommune()
-                + "', Code_postal = '" + ville.getCodePostal() + "', Libelle_acheminement = '"
-                + ville.getLibelleAcheminement() + "', Ligne_5 = '" + ville.getLigne5()
-                + "', Latitude = '" + ville.getLattitude() + "', Longitude = '"
-                + ville.getLongitude() + "' WHERE Code_Commune_INSEE LIKE '%"
-                + ville.getCodeCommuneInsee() + "%'");
+		ResultSet resultSet = statement.executeQuery("UPDATE ville_france SET Nom_Commune = '" + villeP.getNomCommune()
+                + "', Code_postal = '" + villeP.getCodePostal() + "', Libelle_acheminement = '"
+                + villeP.getLibelleAcheminement() + "', Ligne_5 = '" + villeP.getLigne5()
+                + "', Latitude = '" + villeP.getLattitude() + "', Longitude = '"
+                + villeP.getLongitude() + "' WHERE Code_Commune_INSEE LIKE '%"
+                + villeP.getCodeCommuneInsee() + "%'");
 		resultSet.close();
 		statement.close();
 	}
