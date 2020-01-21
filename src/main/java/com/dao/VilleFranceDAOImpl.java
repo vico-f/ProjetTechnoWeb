@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -70,10 +71,10 @@ public class VilleFranceDAOImpl implements VilleFranceDAO{
 
 					// execute la requete
 					try {
-						ResultSet resultSet = statement.executeQuery("DELETE FROM ville_france WHERE "
+						PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM ville_france WHERE "
 						+ "Code_Commune_INSEE LIKE '%" + ville.getCodeCommuneInsee() + "%'");
-						
-						resultSet.close();
+						preparedStatement.executeUpdate();
+						preparedStatement.close();
 						statement.close();
 						
 					} catch (SQLException e) {
@@ -89,13 +90,12 @@ public class VilleFranceDAOImpl implements VilleFranceDAO{
 		// solution 2
 		// Connection con = JDBCConfigurationSol2.getConnection();
 		Statement statement = con.createStatement();
-		
-		ResultSet resultSet = statement.executeQuery(SQL_INSERT+ "'" + ville.getCodeCommuneInsee()
+		PreparedStatement preparedStatement = con.prepareStatement(SQL_INSERT+ "'" + ville.getCodeCommuneInsee()
         + "', " + "'" + ville.getNomCommune() + "', " + "'" + ville.getCodePostal()
         + "', " + "'" + ville.getLibelleAcheminement() + "', " + "'" + ville.getLigne5()
         + "', " + "'" + ville.getLattitude() + "', " + "'" + ville.getLongitude() + "')");
-		
-		resultSet.close();
+		preparedStatement.executeUpdate();
+		preparedStatement.close();
 		statement.close();
 	}
 
@@ -144,13 +144,15 @@ public class VilleFranceDAOImpl implements VilleFranceDAO{
 		// solution 2
 		// Connection con = JDBCConfigurationSol2.getConnection();
 		Statement statement = con.createStatement();
-		ResultSet resultSet = statement.executeQuery("UPDATE ville_france SET Nom_Commune = '" + villeP.getNomCommune()
-                + "', Code_postal = '" + villeP.getCodePostal() + "', Libelle_acheminement = '"
-                + villeP.getLibelleAcheminement() + "', Ligne_5 = '" + villeP.getLigne5()
-                + "', Latitude = '" + villeP.getLattitude() + "', Longitude = '"
-                + villeP.getLongitude() + "' WHERE Code_Commune_INSEE LIKE '%"
-                + villeP.getCodeCommuneInsee() + "%'");
-		resultSet.close();
+		PreparedStatement preparedStatement = con.prepareStatement("UPDATE ville_france SET Nom_Commune = '" + villeP.getNomCommune()
+        + "', Code_postal = '" + villeP.getCodePostal() + "', Libelle_acheminement = '"
+        + villeP.getLibelleAcheminement() + "', Ligne_5 = '" + villeP.getLigne5()
+        + "', Latitude = '" + villeP.getLattitude() + "', Longitude = '"
+        + villeP.getLongitude() + "' WHERE Code_Commune_INSEE LIKE '%"
+        + villeP.getCodeCommuneInsee() + "%'");
+        preparedStatement.executeUpdate();
+
+        preparedStatement.close();
 		statement.close();
 	}
 }

@@ -10,9 +10,9 @@ public interface VilleFranceBLO {
 
 
 	ArrayList<VilleFrance> getInfoVille(VilleFrance ville) throws MissionException, VilleFranceException, SQLException;
-	void ajoutVille(VilleFrance ville) throws SQLException;
+	void ajoutVille(String ville) throws SQLException;
 	void postVille(String ville) throws SQLException;
-	
+	void deleteVille(String codeCommuneInsee) throws SQLException;
 
 
 }

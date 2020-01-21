@@ -34,52 +34,69 @@ public class VilleFranceBLOImpl implements VilleFranceBLO {
 	}
 
 	@Override
-	public void ajoutVille(VilleFrance ville) throws SQLException {
-		villeDAO.putVille(ville);
+	public void ajoutVille(String ville) throws SQLException {
+		 VilleFrance villeFrance = new VilleFrance();
+		villeFrance=formalismePasFou(ville);
+		villeDAO.putVille(villeFrance);
 		
 	}
 
 	@Override
 	public void postVille(String ville) throws SQLException {
 		 VilleFrance villeFrance = new VilleFrance();
-	        int debutDepart = ville.indexOf("codeCommuneInsee=");
-	        int finDepart = ville.indexOf(", nomCommune=");
+		villeFrance=formalismePasFou(ville);
+		villeDAO.modifyVille(villeFrance);
+		
+	}
+
+	@Override
+	public void deleteVille(String codeCommuneInsee) throws SQLException {
+		VilleFrance villeFrance = new VilleFrance();
+		villeFrance.setCodeCommuneInsee(codeCommuneInsee);
+		villeDAO.deleteVille(villeFrance);
+	}
+	
+	public VilleFrance formalismePasFou(String requete) {
+		 VilleFrance villeFrance = new VilleFrance();
+		 System.out.println(requete);
+	        int debutDepart = requete.indexOf("codeCommuneInsee=");
+	        int finDepart = requete.indexOf(", nomCommune=");
 
 	        if (debutDepart < 0) {
 	            debutDepart = -2;
 	        }
 
-	        String codeCommuneInsee = ville.substring(debutDepart + 17, finDepart);
+	        String codeCommuneInsee = requete.substring(debutDepart + 17, finDepart);
 
-	        debutDepart = ville.indexOf("nomCommune=");
-	        finDepart = ville.indexOf(", codePostal=");
+	        debutDepart = requete.indexOf("nomCommune=");
+	        finDepart = requete.indexOf(", codePostal=");
 
-	        String nomCommune = ville.substring(debutDepart + 11, finDepart);
+	        String nomCommune = requete.substring(debutDepart + 11, finDepart);
 
-	        debutDepart = ville.indexOf("codePostal=");
-	        finDepart = ville.indexOf(", libelleAcheminement=");
+	        debutDepart = requete.indexOf("codePostal=");
+	        finDepart = requete.indexOf(", libelleAcheminement=");
 
-	        String codePostal = ville.substring(debutDepart + 11, finDepart);
+	        String codePostal = requete.substring(debutDepart + 11, finDepart);
 
-	        debutDepart = ville.indexOf("libelleAcheminement=");
-	        finDepart = ville.indexOf(", ligne5=");
+	        debutDepart = requete.indexOf("libelleAcheminement=");
+	        finDepart = requete.indexOf(", ligne5=");
 
-	        String libelleAcheminement = ville.substring(debutDepart + 20, finDepart);
+	        String libelleAcheminement = requete.substring(debutDepart + 20, finDepart);
 
-	        debutDepart = ville.indexOf("ligne5=");
-	        finDepart = ville.indexOf(", lattitude=");
+	        debutDepart = requete.indexOf("ligne5=");
+	        finDepart = requete.indexOf(", lattitude=");
 
-	        String ligne5 = ville.substring(debutDepart + 7, finDepart);
+	        String ligne5 = requete.substring(debutDepart + 7, finDepart);
 
-	        debutDepart = ville.indexOf("lattitude=");
-	        finDepart = ville.indexOf(", longitude=");
+	        debutDepart = requete.indexOf("lattitude=");
+	        finDepart = requete.indexOf(", longitude=");
 
-	        String latitude = ville.substring(debutDepart + 10, finDepart);
+	        String latitude = requete.substring(debutDepart + 10, finDepart);
 
-	        debutDepart = ville.indexOf("longitude=");
-	        finDepart = ville.indexOf("]");
+	        debutDepart = requete.indexOf("longitude=");
+	        finDepart = requete.indexOf("]");
 
-	        String longitude = ville.substring(debutDepart + 10, finDepart);
+	        String longitude = requete.substring(debutDepart + 10, finDepart);
 
 	        villeFrance.setCodeCommuneInsee(codeCommuneInsee);
 	        villeFrance.setCodePostal(codePostal);
@@ -88,8 +105,7 @@ public class VilleFranceBLOImpl implements VilleFranceBLO {
 	        villeFrance.setLongitude(longitude);
 	        villeFrance.setNomCommune(nomCommune);
 	        villeFrance.setLigne5(ligne5);
-		villeDAO.modifyVille(villeFrance);
-		
+	        return villeFrance;
 	}
 
 	
