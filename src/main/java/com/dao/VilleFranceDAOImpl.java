@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 
 import com.config.JDBCConfigurationSol1;
-import com.dto.LieuMission;
-import com.dto.Mission;
 import com.dto.VilleFrance;
 
 @Repository
@@ -110,10 +108,9 @@ public class VilleFranceDAOImpl implements VilleFranceDAO{
 			// Connection con = JDBCConfigurationSol2.getConnection();
 			Statement statement = con.createStatement();
 
-			// execute la requete
+			
 			ResultSet resultSet = statement.executeQuery(SQL_SELECT_WHERE + " WHERE Code_Postal LIKE '%" + villeParam.getCodePostal() + "%'");
 
-			// parcourt des éléments de réponse
 			while (resultSet.next()) {
 				VilleFrance ville = new VilleFrance();
 				

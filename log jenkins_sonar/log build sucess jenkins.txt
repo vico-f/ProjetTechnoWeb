@@ -1,0 +1,124 @@
+	
+	Sortie de la console
+
+Démarré par l'utilisateur unknown or anonymous
+Running as SYSTEM
+Building in workspace /home/eseo/.jenkins/workspace/ProjetTechnoWeb
+No credentials specified
+ > /usr/bin/git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > /usr/bin/git config remote.origin.url https://github.com/vico-f/ProjetTechnoWeb.git # timeout=10
+Fetching upstream changes from https://github.com/vico-f/ProjetTechnoWeb.git
+ > /usr/bin/git --version # timeout=10
+ > /usr/bin/git fetch --tags --progress -- https://github.com/vico-f/ProjetTechnoWeb.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > /usr/bin/git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > /usr/bin/git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 173c3aab4232da7fa83f89ac1aadfc294476c180 (refs/remotes/origin/master)
+ > /usr/bin/git config core.sparsecheckout # timeout=10
+ > /usr/bin/git checkout -f 173c3aab4232da7fa83f89ac1aadfc294476c180 # timeout=10
+Commit message: "requetes POST PUT et DELETE fonctionnent"
+ > /usr/bin/git rev-list --no-walk a81fd072c44871a4c41b32b9d17aeb272b48b418 # timeout=10
+[ProjetTechnoWeb] $ /home/eseo/.jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/scanner_SonarQube/bin/sonar-scanner -Dsonar.host.url=http://192.168.4.167:9000/sonarqube/ -Dsonar.projectKey=ESEO_TP_Server_2019_S2 -Dsonar.projectName=ESEO_TP_Server_2019_S2 -Dsonar.sourceEncoding=UTF-8 -Dsonar.projectVersion=1.0 -Dsonar.projectBaseDir=/home/eseo/.jenkins/workspace/ProjetTechnoWeb
+INFO: Scanner configuration file: /home/eseo/.jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/scanner_SonarQube/conf/sonar-scanner.properties
+INFO: Project root configuration file: /home/eseo/.jenkins/workspace/ProjetTechnoWeb/sonar-project.properties
+INFO: SonarQube Scanner 3.0.3.778
+INFO: Java 11.0.5 Oracle Corporation (64-bit)
+INFO: Linux 5.0.0-37-generic amd64
+INFO: User cache: /home/eseo/.sonar/cache
+INFO: SonarQube server 7.8.0
+INFO: Default locale: "fr_FR", source code encoding: "UTF-8"
+INFO: Load global settings
+INFO: Load global settings (done) | time=93ms
+INFO: Server id: 49B321BC-AW-AVYiStOAtQn5yVx3K
+INFO: User cache: /home/eseo/.sonar/cache
+INFO: Load/download plugins
+INFO: Load plugins index
+INFO: Load plugins index (done) | time=59ms
+INFO: Load/download plugins (done) | time=136ms
+INFO: Process project properties
+INFO: Execute project builders
+INFO: Execute project builders (done) | time=6ms
+INFO: Project key: ESEO_TP_Server_2019_S2
+INFO: Base dir: /home/eseo/.jenkins/workspace/ProjetTechnoWeb
+INFO: Working dir: /home/eseo/.jenkins/workspace/ProjetTechnoWeb/.scannerwork
+INFO: Load project settings for component key: 'ESEO_TP_Server_2019_S2'
+INFO: Load project settings for component key: 'ESEO_TP_Server_2019_S2' (done) | time=38ms
+INFO: Load quality profiles
+INFO: Load quality profiles (done) | time=72ms
+INFO: Detected Jenkins
+INFO: Load active rules
+INFO: Load active rules (done) | time=1604ms
+INFO: Indexing files...
+INFO: Project configuration:
+INFO: 24 files indexed
+INFO: 0 files ignored because of scm ignore settings
+INFO: Quality profile for java: Sonar way
+INFO: Quality profile for xml: Sonar way
+INFO: ------------- Run sensors on module ESEO_TP_Server_2019_S2
+INFO: Load metrics repository
+INFO: Load metrics repository (done) | time=87ms
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by net.sf.cglib.core.ReflectUtils$1 (file:/home/eseo/.sonar/cache/866bb1adbf016ea515620f1aaa15ec53/sonar-javascript-plugin.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
+WARNING: Please consider reporting this to the maintainers of net.sf.cglib.core.ReflectUtils$1
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+INFO: Sensor JavaSquidSensor [java]
+INFO: Configured Java source version (sonar.java.source): none
+INFO: JavaClasspath initialization
+WARN: Bytecode of dependencies was not provided for analysis of source files, you might end up with less precise results. Bytecode can be provided using sonar.java.libraries property.
+INFO: JavaClasspath initialization (done) | time=20ms
+INFO: JavaTestClasspath initialization
+INFO: JavaTestClasspath initialization (done) | time=1ms
+INFO: Java Main Files AST scan
+INFO: 21 source files to be analyzed
+INFO: Load project repositories
+INFO: Load project repositories (done) | time=30ms
+INFO: 21/21 source files have been analyzed
+INFO: Java Main Files AST scan (done) | time=3648ms
+INFO: Java Test Files AST scan
+INFO: 0 source files to be analyzed
+INFO: Java Test Files AST scan (done) | time=1ms
+INFO: Sensor JavaSquidSensor [java] (done) | time=4660ms
+INFO: Sensor JaCoCo XML Report Importer [jacoco]
+INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=2ms
+INFO: Sensor SurefireSensor [java]
+INFO: parsing [/home/eseo/.jenkins/workspace/ProjetTechnoWeb/target/surefire-reports]
+INFO: Sensor SurefireSensor [java] (done) | time=1ms
+INFO: 0/0 source files have been analyzed
+INFO: Sensor JaCoCoSensor [java]
+INFO: Sensor JaCoCoSensor [java] (done) | time=1ms
+INFO: Sensor JavaXmlSensor [java]
+INFO: 1 source files to be analyzed
+INFO: 1/1 source files have been analyzed
+INFO: Sensor JavaXmlSensor [java] (done) | time=248ms
+INFO: Sensor HTML [web]
+INFO: Sensor HTML [web] (done) | time=18ms
+INFO: Sensor XML Sensor [xml]
+INFO: 1 source files to be analyzed
+INFO: 1/1 source files have been analyzed
+INFO: Sensor XML Sensor [xml] (done) | time=206ms
+INFO: ------------- Run sensors on project
+INFO: Sensor Zero Coverage Sensor
+INFO: Sensor Zero Coverage Sensor (done) | time=22ms
+INFO: Sensor Java CPD Block Indexer
+INFO: Sensor Java CPD Block Indexer (done) | time=63ms
+INFO: SCM provider for this project is: git
+INFO: 4 files to be analyzed
+INFO: 4/4 files analyzed
+INFO: 10 files had no CPD blocks
+INFO: Calculating CPD for 11 files
+INFO: CPD calculation finished
+INFO: Analysis report generated in 150ms, dir size=146 KB
+INFO: Analysis report compressed in 114ms, zip size=62 KB
+INFO: Analysis report uploaded in 212ms
+INFO: ANALYSIS SUCCESSFUL, you can browse http://192.168.4.167:9000/sonarqube/dashboard?id=ESEO_TP_Server_2019_S2
+INFO: Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+INFO: More about the report processing at http://192.168.4.167:9000/sonarqube/api/ce/task?id=AW_Ioadj3DtFJmMY61da
+INFO: Analysis total time: 11.793 s
+INFO: ------------------------------------------------------------------------
+INFO: EXECUTION SUCCESS
+INFO: ------------------------------------------------------------------------
+INFO: Total time: 13.497s
+INFO: Final Memory: 17M/65M
+INFO: ------------------------------------------------------------------------
+Finished: SUCCESS

@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dao.MissionDAO;
+
 import com.dao.VilleFranceDAO;
-import com.dto.Mission;
 import com.dto.VilleFrance;
 
 @Service
@@ -45,8 +44,11 @@ public class VilleFranceBLOImpl implements VilleFranceBLO {
 	public void postVille(String ville) throws SQLException {
 		 VilleFrance villeFrance = new VilleFrance();
 		villeFrance=formalismePasFou(ville);
-		villeDAO.modifyVille(villeFrance);
-		
+		if(villeDAO.findVille(villeFrance).isEmpty()) {
+			villeDAO.putVille(villeFrance);	
+		}else {
+			villeDAO.modifyVille(villeFrance);
+		}
 	}
 
 	@Override

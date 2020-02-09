@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.blo.MissionBLO;
-import com.blo.MissionException;
 import com.blo.VilleFranceBLO;
 import com.blo.VilleFranceException;
 import com.dao.VilleFranceDAO;
@@ -28,7 +26,7 @@ class VilleFranceController {
 	// Methode GET
 	@RequestMapping(value = "/villeFrance", method = RequestMethod.GET)
 	@ResponseBody
-	public String recover(@RequestParam(required = false, value = "codePostal") String codePostal) throws MissionException, VilleFranceException, SQLException {
+	public String recover(@RequestParam(required = false, value = "codePostal") String codePostal) throws VilleFranceException, SQLException {
 		System.out.println("Appel GET");
 		VilleFrance vf= new VilleFrance();
 		vf.setCodePostal(codePostal);
@@ -39,7 +37,7 @@ class VilleFranceController {
 
 	// Methode POST
 	// /villeFrancePost?value=[codeCommuneInsee=01000, nomCommune=L ABERGEMENT CLEMENCIAT, codePostal=01400, libelleAcheminement=L ABERGEMENT CLEMENCIAT, ligne5=, lattitude=46.1331001556, longitude=4.99858455549]
-	@RequestMapping(value = "/villeFrancePost", method = RequestMethod.POST)
+	@RequestMapping(value = "/villeFrance", method = RequestMethod.POST)
 	@ResponseBody
 	public String post(@RequestParam(required = false, value = "value") String ville) throws SQLException {
 		System.out.println("Appel POST");
@@ -49,9 +47,9 @@ class VilleFranceController {
 		
 	// Methode PUT
 	// /villeFrancePut?value=[codeCommuneInsee=00001, nomCommune=TEST, codePostal=00001, libelleAcheminement=TEST, ligne5=, lattitude=0.00, longitude=0.00]
-	@RequestMapping(value = "/villeFrancePut", method = RequestMethod.PUT)
+	@RequestMapping(value = "/villeFrance", method = RequestMethod.PUT)
 	@ResponseBody
-	public String put(@RequestParam(required = false, value = "value") String villeAjout) throws MissionException, VilleFranceException, SQLException {
+	public String put(@RequestParam(required = false, value = "value") String villeAjout) throws VilleFranceException, SQLException {
 		System.out.println("Appel PUT");
 		villeService.ajoutVille(villeAjout);
 		return "ville ajouté dans la BDD";
@@ -59,9 +57,9 @@ class VilleFranceController {
 	
 	//Methode DELETE
 	// /villeFranceDelete?codeCommuneInsee=00001
-	@RequestMapping(value = "/villeFranceDelete", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/villeFrance", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String delete(@RequestParam(required = false, value = "codeCommuneInsee") String codeCommuneInsee) throws MissionException, VilleFranceException, SQLException {
+	public String delete(@RequestParam(required = false, value = "codeCommuneInsee") String codeCommuneInsee) throws VilleFranceException, SQLException {
 		System.out.println("Appel DELETE");
 		villeService.deleteVille(codeCommuneInsee);
 		return "ville supprimé de la BDD";
